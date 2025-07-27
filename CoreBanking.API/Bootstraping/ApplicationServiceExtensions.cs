@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using CoreBanking.Infrastructure.Data;
 
 namespace CoreBanking.API.Bootstraping;
 
@@ -18,6 +19,8 @@ public static class ApplicationServiceExtensions
                 new HeaderApiVersionReader("X-Version") // Read version from custom header
             );
         });
+
+        builder.AddNpgsqlDbContext<CoreBankingDbContext>("corebanking-db");
 
         return builder;
     }

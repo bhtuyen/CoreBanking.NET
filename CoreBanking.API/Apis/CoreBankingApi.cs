@@ -1,5 +1,9 @@
 ﻿
 using CoreBanking.API.Models;
+using CoreBanking.API.Services;
+using CoreBanking.Infrastructure.Entity;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreBanking.API.Apis;
 
@@ -46,13 +50,49 @@ public static class CoreBankingApi
         throw new NotImplementedException();
     }
 
-    private static async Task CreateCustomer()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="customer"></param>
+    /// <returns></returns>
+    private static async Task<Results<Ok<Customer>, BadRequest>> CreateCustomer([AsParameters] CoreBankingServices services, Customer customer)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(customer.Name))
+        {
+            services.Logger.LogError("Customer name can't be empty");
+            return TypedResults.BadRequest();
+        }
+
+        customer.Address ??= string.Empty;
+
+        if(customer.Id == Guid.Empty)
+        {
+            customer.Id = Guid.CreateVersion7();
+        }
+
+        services.DbContext.Customers.Add(customer);
+
+        await services.DbContext.SaveChangesAsync();
+
+        services.Logger.LogInformation("Customer created!");
+
+        return TypedResults.Ok(customer);
+
     }
 
-    private static async Task GetCustomers([AsParameters] PaginationRequest paginationRequest)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pagination"></param>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    private static async Task<Ok<PaginationResponse<Customer>>> GetCustomers([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services)
     {
-        throw new NotImplementedException();
+        var list = await services.DbContext.Customers.OrderBy(x => x.Name).Skip(pagination.PageIndex * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
+        var count = await services.DbContext.Customers.CountAsync();
+
+        return TypedResults.Ok(new PaginationResponse<Customer>(pagination.PageIndex, pagination.PageSize, count, list));
+
     }
 }
