@@ -25,7 +25,7 @@ public static class CoreBankingApi
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    private static async Task<Results<Ok<Account>, BadRequest>> Transfer(Guid id, [AsParameters] CoreBankingServices services, TransferRequest transfer)
+    public static async Task<Results<Ok<Account>, BadRequest>> Transfer(Guid id, [AsParameters] CoreBankingServices services, TransferRequest transfer)
     {
         if (id == Guid.Empty)
         {
@@ -117,7 +117,7 @@ public static class CoreBankingApi
     /// <param name="services"></param>
     /// <param name="withdrawal"></param>
     /// <returns></returns>
-    private static async Task<Results<Ok<Account>, BadRequest>> Withdraw(Guid id, [AsParameters] CoreBankingServices services, WithdrawalRequest withdrawal)
+    public static async Task<Results<Ok<Account>, BadRequest>> Withdraw(Guid id, [AsParameters] CoreBankingServices services, WithdrawalRequest withdrawal)
     {
         if (id == Guid.Empty)
         {
@@ -176,7 +176,7 @@ public static class CoreBankingApi
     /// <param name="services"></param>
     /// <param name="deposition"></param>
     /// <returns></returns>
-    private static async Task<Results<Ok<Account>, BadRequest>> Deposit(Guid id, [AsParameters] CoreBankingServices services, DepositionRequest deposition)
+    public static async Task<Results<Ok<Account>, BadRequest>> Deposit(Guid id, [AsParameters] CoreBankingServices services, DepositionRequest deposition)
     {
         if (id == Guid.Empty)
         {
@@ -233,7 +233,7 @@ public static class CoreBankingApi
     /// <param name="services"></param>
     /// <param name="account"></param>
     /// <returns></returns>
-    private static async Task<Results<Ok<Account>, BadRequest>> CreateAccount([AsParameters] CoreBankingServices services, Account account)
+    public static async Task<Results<Ok<Account>, BadRequest>> CreateAccount([AsParameters] CoreBankingServices services, Account account)
     {
         if (account.CustomerId == Guid.Empty)
         {
@@ -254,7 +254,7 @@ public static class CoreBankingApi
         return TypedResults.Ok(account);
     }
 
-    private static string GenerateAccountNumber()
+    public static string GenerateAccountNumber()
     {
         return DateTime.UtcNow.Ticks.ToString();
     }
@@ -266,7 +266,7 @@ public static class CoreBankingApi
     /// <param name="services"></param>
     /// <param name="customerId"></param>
     /// <returns></returns>
-    private static async Task<Ok<PaginationResponse<Account>>> GetAccounts([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services, Guid? customerId = null)
+    public static async Task<Ok<PaginationResponse<Account>>> GetAccounts([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services, Guid? customerId = null)
     {
         IQueryable<Account> account = services.DbContext.Accounts;
 
@@ -289,7 +289,7 @@ public static class CoreBankingApi
     /// <param name="services"></param>
     /// <param name="customer"></param>
     /// <returns></returns>
-    private static async Task<Results<Ok<Customer>, BadRequest>> CreateCustomer([AsParameters] CoreBankingServices services, Customer customer)
+    public static async Task<Results<Ok<Customer>, BadRequest>> CreateCustomer([AsParameters] CoreBankingServices services, Customer customer)
     {
         if (string.IsNullOrEmpty(customer.Name))
         {
@@ -319,7 +319,7 @@ public static class CoreBankingApi
     /// <param name="pagination"></param>
     /// <param name="services"></param>
     /// <returns></returns>
-    private static async Task<Ok<PaginationResponse<Customer>>> GetCustomers([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services)
+    public static async Task<Ok<PaginationResponse<Customer>>> GetCustomers([AsParameters] PaginationRequest pagination, [AsParameters] CoreBankingServices services)
     {
         var customers = services.DbContext.Customers;
         var list = await customers.OrderBy(x => x.Name).Skip(pagination.PageIndex * pagination.PageSize).Take(pagination.PageSize).ToListAsync();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.36105.23 d17.13
+VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBanking.AppHost.AppHost", "CoreBanking.AppHost\CoreBanking.AppHost.AppHost\CoreBanking.AppHost.AppHost.csproj", "{8A6AC0A2-C023-4F21-91A6-D8489280E26C}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBanking.Infrastructure", "CoreBanking.Infrastructure\CoreBanking.Infrastructure.csproj", "{95DE9C23-F968-46FD-8330-D34F20814235}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBanking.MigrationService", "CoreBanking.MigrationService\CoreBanking.MigrationService.csproj", "{81025B4B-E262-4B76-FC3C-373931113A48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBanking.UnitTests", "CoreBanking.UnitTest\CoreBanking.UnitTests.csproj", "{F1605338-709D-40A7-AD82-3CA93A67E5F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBanking.IntegrationTests", "CoreBanking.IntegrationTests\CoreBanking.IntegrationTests.csproj", "{3E28CB1E-EE82-405B-891B-BA1C257926D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{81025B4B-E262-4B76-FC3C-373931113A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81025B4B-E262-4B76-FC3C-373931113A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81025B4B-E262-4B76-FC3C-373931113A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1605338-709D-40A7-AD82-3CA93A67E5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1605338-709D-40A7-AD82-3CA93A67E5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1605338-709D-40A7-AD82-3CA93A67E5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1605338-709D-40A7-AD82-3CA93A67E5F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E28CB1E-EE82-405B-891B-BA1C257926D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E28CB1E-EE82-405B-891B-BA1C257926D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E28CB1E-EE82-405B-891B-BA1C257926D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E28CB1E-EE82-405B-891B-BA1C257926D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
